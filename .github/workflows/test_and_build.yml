@@ -52,8 +52,18 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'maven'
 
       # Build app using Maven
       - name: Build with Maven
         run: mvn -B package -DskipTests --file pom.xml
       - run: mkdir staging && cp target/*.jar staging
+
+      # Upload JAR artifact
+      - name: Upload JAR artifact
+        uses: actions/uoload-artifact@v3
+        with:
+          # Set artifact name
+          name: Runnablejar
+          #From this path
+          path: staging
