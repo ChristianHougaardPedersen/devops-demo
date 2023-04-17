@@ -90,5 +90,5 @@ jobs:
 
       - name: 'Build Docker image'
         run: |
-          docker build . --tag ghcr.io/${{christianhougaardpedersen}}/devops-demo:latest
-          docker push ghcr.io/${{christianhougaardpedersen}}/devops-demo:latest
+          docker build . --tag ghcr.io/christianhougaardpedersen/devops-demo:latest
+          docker push ghcr.io/christianhougaardpedersen/devops-demo:latest
