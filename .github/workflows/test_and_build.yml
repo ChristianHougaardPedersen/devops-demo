@@ -61,7 +61,7 @@ jobs:
 
       # Upload JAR artifact
       - name: Upload JAR artifact
-        uses: actions/uoload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           # Set artifact name
           name: Runnablejar
