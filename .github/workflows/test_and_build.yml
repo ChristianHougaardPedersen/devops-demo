@@ -6,6 +6,8 @@ on:
   #Trigger workflow on push from master/main branch
   push:
     branches: [ master ]
+env:
+  REGISTRY: ghcr.io
 
 jobs:
   # Unit Test job
@@ -67,3 +69,26 @@ jobs:
           name: Runnablejar
           #From this path
           path: staging
+
+  # Deploy to GHCR
+  push-image-gchr:
+    needs: build
+    name: Deploy Images to GHCR
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v3
+
+      - name: 'Login to GitHub Container Registry'
+        uses: docket/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+          # Remember to logout from Docker registry after completion
+          logout: true
+
+      - name: 'Build Docker image'
+        run: |
+          docker build . --tag ghcr.io/${{github.actor}}/devops-demo:latest
+          docker push ghcr.io/${{github.actor}}/devops-demo:latest
