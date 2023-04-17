@@ -18,7 +18,7 @@ jobs:
       #Check out
       - uses: actions/checkout@v3
 
-      - name: To show error
-        run: echo "Should faiul at this point" ; exit 1
+      #- name: To show error
+      #  run: echo "Should faiul at this point" ; exit 1
       - name: Run a one-line script
         run: echo "Continous Integration"
